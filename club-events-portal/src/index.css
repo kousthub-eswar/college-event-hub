@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Deep Cyber-Minimalist Dark Theme Palette */
+  --color-bg-main: #09090b;       /* Zinc 950 */
+  --color-bg-card: #18181b;       /* Zinc 900 */
+  --color-border-subtle: #27272a; /* Zinc 800 */
+  --color-border-hover: #3f3f46;  /* Zinc 700 */
+
+  /* Fine White & Slate Text colors */
+  --color-text-primary: #fafafa;  /* Zinc 50 */
+  --color-text-secondary: #a1a1aa;/* Zinc 400 */
+  --color-text-muted: #71717a;    /* Zinc 500 */
+
+  /* Vibrant, focused accents */
+  --color-accent-blue: #3b82f6;   /* Blue 500 */
+  --color-accent-indigo: #6366f1; /* Indigo 500 */
+  --color-accent-purple: #a855f7; /* Purple 500 */
+  --color-accent-pink: #ec4899;   /* Pink 500 */
+  --color-accent-green: #10b981;  /* Emerald 500 */
+  --color-accent-yellow: #f59e0b; /* Amber 500 */
+  --color-accent-red: #ef4444;    /* Red 500 */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-main);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.03) 0px, transparent 50%);
+  min-height: 100vh;
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-subtle);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+/* Premium minimalist card */
+.cyber-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Animation utilities */
+.page-enter {
+  animation: slideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
