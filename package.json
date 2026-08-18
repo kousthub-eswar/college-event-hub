@@ -1,8 +1,10 @@
 {
-  "dependencies": {
-    "react-router-dom": "^7.9.4"
-  },
-  "devDependencies": {
-    "@types/react-router-dom": "^5.3.3"
+  "name": "college-event-hub",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix club-events-portal run dev",
+    "build": "npm --prefix club-events-portal run build",
+    "preview": "npm --prefix club-events-portal run preview"
   }
 }

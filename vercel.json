@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm --prefix club-events-portal run build",
+  "outputDirectory": "club-events-portal/dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
