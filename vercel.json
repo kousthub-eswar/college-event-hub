@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm --prefix club-events-portal run build",
+  "buildCommand": "cd club-events-portal && npm install && npm run build",
   "outputDirectory": "club-events-portal/dist",
   "rewrites": [
     {
