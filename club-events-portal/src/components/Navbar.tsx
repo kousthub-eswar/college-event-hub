@@ -7,6 +7,8 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const isOrganizer = user?.role === "organizer" || user?.email.endsWith("@vit.ac.in");
+
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -15,7 +17,7 @@ export default function Navbar() {
   const linkStyle = (isActive: boolean): React.CSSProperties => ({
     textDecoration: "none",
     color: isActive ? "#fafafa" : "#a1a1aa",
-    fontWeight: 500,
+    fontWeight: 600,
     fontSize: "0.8125rem",
     padding: "0.375rem 0.75rem",
     borderRadius: "0.25rem",
@@ -30,7 +32,7 @@ export default function Navbar() {
         position: "sticky",
         top: 0,
         zIndex: 100,
-        background: "rgba(9, 9, 11, 0.8)",
+        background: "rgba(9, 9, 11, 0.85)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         borderBottom: "1px solid #27272a",
@@ -44,7 +46,7 @@ export default function Navbar() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          height: "3.5rem",
+          height: "3.75rem",
         }}
       >
         {/* Logo */}
@@ -57,16 +59,31 @@ export default function Navbar() {
             gap: "0.5rem",
           }}
         >
-          <span style={{ fontSize: "1.25rem" }}>✦</span>
+          <span style={{ fontSize: "1.25rem", color: isOrganizer ? "#10b981" : "#3b82f6" }}>✦</span>
           <span
             style={{
               fontSize: "0.9375rem",
-              fontWeight: 600,
+              fontWeight: 700,
               color: "#fafafa",
               letterSpacing: "-0.01em",
             }}
           >
             campus.clubhub
+          </span>
+          <span
+            style={{
+              fontSize: "0.625rem",
+              fontWeight: 700,
+              padding: "0.15rem 0.375rem",
+              borderRadius: "0.25rem",
+              background: isOrganizer ? "rgba(16,185,129,0.15)" : "rgba(59,130,246,0.15)",
+              color: isOrganizer ? "#10b981" : "#3b82f6",
+              border: isOrganizer
+                ? "1px solid rgba(16,185,129,0.3)"
+                : "1px solid rgba(59,130,246,0.3)",
+            }}
+          >
+            {isOrganizer ? "ORGANIZER" : "VIT STUDENT"}
           </span>
         </NavLink>
 
@@ -75,7 +92,7 @@ export default function Navbar() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "0.25rem",
+            gap: "0.375rem",
           }}
           className="nav-links-desktop"
         >
@@ -83,8 +100,21 @@ export default function Navbar() {
             Events
           </NavLink>
           <NavLink to="/profile" style={({ isActive }) => linkStyle(isActive)}>
-            Profile
+            Passes & Profile
           </NavLink>
+          {isOrganizer && (
+            <NavLink
+              to="/admin"
+              style={({ isActive }) => ({
+                ...linkStyle(isActive),
+                color: isActive ? "#10b981" : "#6ee7b7",
+                background: isActive ? "rgba(16, 185, 129, 0.15)" : "transparent",
+                border: isActive ? "1px solid rgba(16, 185, 129, 0.4)" : "1px solid transparent",
+              })}
+            >
+              🛡️ Organizer Console
+            </NavLink>
+          )}
         </div>
 
         {/* User Info & Logout */}
@@ -92,19 +122,23 @@ export default function Navbar() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "1rem",
+            gap: "0.875rem",
           }}
         >
-          <span
-            style={{
-              color: "#71717a",
-              fontSize: "0.75rem",
-              fontFamily: "monospace",
-            }}
-            className="user-email-desktop"
-          >
-            {user?.email}
-          </span>
+          <div className="user-email-desktop" style={{ textAlign: "right" }}>
+            <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "#fafafa" }}>
+              {user?.name}
+            </div>
+            <div
+              style={{
+                color: "#71717a",
+                fontSize: "0.6875rem",
+                fontFamily: "monospace",
+              }}
+            >
+              {user?.email}
+            </div>
+          </div>
 
           {/* Mobile toggle */}
           <button
@@ -132,7 +166,7 @@ export default function Navbar() {
               padding: "0.375rem 0.75rem",
               borderRadius: "0.25rem",
               fontSize: "0.75rem",
-              fontWeight: 500,
+              fontWeight: 600,
               cursor: "pointer",
               transition: "all 0.15s ease",
               fontFamily: "inherit",
@@ -183,8 +217,21 @@ export default function Navbar() {
               display: "block",
             })}
           >
-            Profile
+            Passes & Profile
           </NavLink>
+          {isOrganizer && (
+            <NavLink
+              to="/admin"
+              onClick={() => setMobileOpen(false)}
+              style={({ isActive }) => ({
+                ...linkStyle(isActive),
+                display: "block",
+                color: "#10b981",
+              })}
+            >
+              🛡️ Organizer Console
+            </NavLink>
+          )}
           <button
             onClick={handleLogout}
             style={{
